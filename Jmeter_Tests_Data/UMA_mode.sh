@@ -1,6 +1,7 @@
 #!/bin/bash
-    > UMAcredentials.csv
-    > Cus_credentials.csv
+mkdir -p Test_Data
+    > Test_Data/UMAcredentials.csv
+    > Test_Data/Cus_credentials.csv
 for i in {1..50}
 do
     echo $i
@@ -21,7 +22,7 @@ sleep 3
     UOXD_ID=`echo $UMA_RESPONSE | jq -r ".config | .oxd_id"`
     UCLIENT_ID=`echo $UMA_RESPONSE | jq -r ".config | .client_id"`
     UCLIENT_SECRET=`echo $UMA_RESPONSE | jq -r ".config | .client_secret"`
-    echo "$UOXD_ID,$UCLIENT_ID,$UCLIENT_SECRET,$API_PATH" >> UMAcredentials.csv
+    echo "$UOXD_ID,$UCLIENT_ID,$UCLIENT_SECRET,$API_PATH" >> Test_Data/UMAcredentials.csv
 
 sleep 3
     CusNAME="name$i"
@@ -32,7 +33,7 @@ sleep 3
     OXD_ID=`echo $RESPONSE | jq -r ".oxd_id"`
     CLIENT_ID=`echo $RESPONSE | jq -r ".client_id"`
     CLIENT_SECRET=`echo $RESPONSE | jq -r ".client_secret"`
-    echo "$OXD_ID,$CLIENT_ID,$CLIENT_SECRET" >> Cus_credentials.csv
+    echo "$OXD_ID,$CLIENT_ID,$CLIENT_SECRET" >> Test_Data/Cus_credentials.csv
     
 done 
 

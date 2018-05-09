@@ -1,5 +1,6 @@
 #!/bin/bash
-> basic_credentials.csv
+mkdir -p Test_Data
+> Test_Data/basic_credentials.csv
 for i in {1..10}
 do
     echo $i
@@ -11,6 +12,6 @@ do
     curl -d "username=$NAME&custom_id=$ID" http://dev2.gluu.org:8001/consumers/
     RESPONSE=`curl -X POST  --data "username=$NAME" --data "password=$PASSWORD" http://dev2.gluu.org:8001/consumers/$NAME/basic-auth`
     echo $RESPONSE
-    echo "$NAME,$PASSWORD" >> basic_credentials.csv
+    echo "$NAME,$PASSWORD" >> Test_Data/basic_credentials.csv
     
 done 
