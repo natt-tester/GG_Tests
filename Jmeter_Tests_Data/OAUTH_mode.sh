@@ -2,8 +2,9 @@
 mkdir -p Test_Data
     > Test_Data/OAUTH_credentials.csv
 GG_HOST="dev1.gluu.org"
-END=$1
-for i in $(eval echo "{1..$END}")
+START=$1
+END=$2
+for i in $(eval echo "{$START..$END}")
 do
     echo $i
     NAME="OAUTH_name$i"
@@ -15,7 +16,6 @@ do
     curl -X DELETE http://$GG_HOST:8001/apis/$APINAME
     curl -X POST http://$GG_HOST:8001/apis --data "name=$APINAME" --data "hosts=$HOST" --data "upstream_url=$UPSTREAMURL"
     curl -X POST http://$GG_HOST:8001/apis/$APINAME/plugins --data "name=gluu-oauth2-client-auth" --data "config.op_server=https://ce-dev6.gluu.org" --data "config.oxd_http_url=https://localhost:8443"
-    sleep 3
 
     RESPONSE=`curl -X POST http://$GG_HOST:8001/consumers/$NAME/gluu-oauth2-client-auth/ -d name="$APINAME" -d op_host="ce-dev6.gluu.org" -d oxd_http_url="https://localhost:8443" -d oauth_mode=true`
 

@@ -3,8 +3,9 @@ mkdir -p Test_Data
     > Test_Data/MIX_credentials.csv
     > Test_Data/MIX_cus_credentials.csv
 GG_HOST="dev1.gluu.org"
-END=$1
-for i in $(eval echo "{1..$END}")
+START=$1
+END=$2
+for i in $(eval echo "{$START..$END}")
 do
     echo $i
     NAME="MIX_name$i"
