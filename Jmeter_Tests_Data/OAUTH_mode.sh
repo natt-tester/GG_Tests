@@ -2,6 +2,7 @@
 mkdir -p Test_Data
     > Test_Data/OAUTH_credentials.csv
 GG_HOST="dev1.gluu.org"
+UPSTREAMURL="http://dev2.gluu.org/aa"
 START=$1
 END=$2
 for i in $(eval echo "{$START..$END}")
@@ -10,7 +11,6 @@ do
     NAME="OAUTH_name$i"
     APINAME="OAUTH_apiname$i"
     HOST="oauth$i.example.com"
-    UPSTREAMURL="http://mockbin.com"
     curl -X DELETE http://$GG_HOST:8001/consumers/$NAME
     curl -X POST http://$GG_HOST:8001/consumers/ --data "username=$NAME"
     curl -X DELETE http://$GG_HOST:8001/apis/$APINAME
